@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nathan J. Day — Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --green-deep:   #1a9641;
+      --green-light:  #a6d96a;
+      --pink-deep:    #d02c91;
+      --pink-light:   #f1b6da;
+      --muted:        #978897;
+      --rule:         #d1d1ca;
+      --bg:           #fafaf8;
+      --surface:      #f4f4f0;
+      --ink:          #1a1a18;
+      --ink-soft:     #3d3d38;
+      --ink-faint:    #7a7a72;
+
+      --mono: 'JetBrains Mono', monospace;
+      --serif: 'DM Serif Display', Georgia, serif;
+      --body: 'Lora', Georgia, serif;
+
+      --margin-w: 100px;
+      --content-max: 780px;
+      --col-gap: 40px;
+    }
+
+    /* ── RESET ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--body);
+      font-size: 16px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--green-deep); text-decoration: none; }
+    a:hover { color: var(--pink-deep); }
+
+    /* ── LAYOUT ─────────────────────────────────────────────── */
+    .page-wrap {
+      max-width: calc(var(--margin-w) + var(--col-gap) + var(--content-max) + 60px);
+      margin: 0 auto;
+      padding: 0 30px;
+    }
+
+    /* Two-column grid: margin label | content */
+    .cv-row {
+      display: grid;
+      grid-template-columns: var(--margin-w) 1fr;
+      gap: 0 var(--col-gap);
+      margin-bottom: 0;
+    }
+    .cv-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      font-weight: 400;
+      color: var(--ink-faint);
+      letter-spacing: 0.03em;
+      padding-top: 3px;
+      text-align: right;
+      line-height: 1.5;
+    }
+    .cv-content { min-width: 0; }
+
+    /* ── NAV ────────────────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
+      padding: 14px 30px;
+    }
+    .nav-inner {
+      max-width: calc(var(--margin-w) + var(--col-gap) + var(--content-max) + 60px);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .nav-name {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--green-deep); }
+
+    /* ── HERO ───────────────────────────────────────────────── */
+    #about {
+      padding: 80px 0 60px;
+      border-bottom: 1px solid var(--rule);
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: var(--margin-w) 1fr;
+      gap: 0 var(--col-gap);
+      align-items: start;
+    }
+    .hero-monogram {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink-faint);
+      text-align: right;
+      padding-top: 8px;
+      line-height: 1.8;
+    }
+    .hero-monogram span {
+      display: block;
+      width: 28px;
+      height: 1px;
+      background: var(--green-deep);
+      margin: 8px 0 8px auto;
+    }
+    h1.name {
+      font-family: var(--serif);
+      font-size: clamp(38px, 5vw, 58px);
+      font-weight: 400;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .title-line {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 28px;
+    }
+    .title-line .accent { color: var(--green-deep); }
+    .bio {
+      font-size: 16px;
+      line-height: 1.8;
+      color: var(--ink-soft);
+      max-width: 620px;
+      margin-bottom: 32px;
+    }
+    .hero-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .pill {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border: 1px solid var(--rule);
+      color: var(--ink-soft);
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+    .pill:hover {
+      border-color: var(--green-deep);
+      color: var(--green-deep);
+      background: transparent;
+    }
+    .pill.primary {
+      background: var(--green-deep);
+      border-color: var(--green-deep);
+      color: white;
+    }
+    .pill.primary:hover {
+      background: var(--pink-deep);
+      border-color: var(--pink-deep);
+      color: white;
+    }
+
+    /* ── SECTION SCAFFOLD ───────────────────────────────────── */
+    section { padding: 56px 0; border-bottom: 1px solid var(--rule); }
+    section:last-of-type { border-bottom: none; }
+
+    .section-header {
+      display: grid;
+      grid-template-columns: var(--margin-w) 1fr;
+      gap: 0 var(--col-gap);
+      margin-bottom: 36px;
+    }
+    .section-tag {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+      text-align: right;
+      padding-top: 10px;
+    }
+    h2.section-title {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+
+    /* ── IN NUMBERS ─────────────────────────────────────────── */
+    #numbers { background: var(--surface); }
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2px;
+      margin-left: calc(var(--margin-w) + var(--col-gap));
+    }
+    .number-card {
+      padding: 28px 24px;
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .number-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--green-deep);
+      transition: width 0.4s ease;
+    }
+    .number-card:hover::after { width: 100%; }
+    .number-card:hover { background: #f0f7f0; }
+    .number-value {
+      font-family: var(--mono);
+      font-size: 38px;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1;
+      margin-bottom: 8px;
+      display: block;
+    }
+    .number-value .unit {
+      font-size: 18px;
+      color: var(--muted);
+    }
+    .number-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      line-height: 1.4;
+    }
+
+    /* ── RESEARCH ───────────────────────────────────────────── */
+    .interests-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 40px;
+      margin-left: calc(var(--margin-w) + var(--col-gap));
+    }
+    .interest-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      padding: 5px 12px;
+      border: 1px solid var(--green-light);
+      color: var(--green-deep);
+      border-radius: 2px;
+      background: #f0faf0;
+    }
+
+    .experience-entry {
+      display: grid;
+      grid-template-columns: var(--margin-w) 1fr;
+      gap: 0 var(--col-gap);
+      margin-bottom: 28px;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .experience-entry.visible {
+      opacity: 1;
+      transform: none;
+    }
+    .exp-title {
+      font-family: var(--body);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+    .exp-place {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .exp-desc {
+      font-size: 14px;
+      color: var(--ink-soft);
+      line-height: 1.7;
+    }
+
+    /* ── PUBLICATIONS ───────────────────────────────────────── */
+    .pub-entry {
+      display: grid;
+      grid-template-columns: var(--margin-w) 1fr;
+      gap: 0 var(--col-gap);
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--rule);
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .pub-entry:last-child { border-bottom: none; }
+    .pub-entry.visible { opacity: 1; transform: none; }
+
+    .pub-year {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink-faint);
+      text-align: right;
+      padding-top: 3px;
+    }
+    .pub-year.highlight {
+      color: var(--pink-deep);
+      font-weight: 500;
+    }
+    .pub-title {
+      font-family: var(--body);
+      font-size: 15px;
+      font-style: italic;
+      color: var(--ink);
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+    .pub-authors {
+      font-size: 13px;
+      color: var(--ink-faint);
+      margin-bottom: 4px;
+      line-height: 1.5;
+    }
+    .pub-authors strong { color: var(--ink-soft); font-weight: 500; }
+    .pub-journal {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.03em;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+    .pub-journal .journal-name { color: var(--green-deep); }
+    .pub-link {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+      border-bottom: 1px solid var(--green-light);
+      padding-bottom: 1px;
+    }
+    .pub-link:hover { color: var(--pink-deep); border-color: var(--pink-light); }
+    .preprint-badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      background: var(--pink-light);
+      color: var(--pink-deep);
+      border-radius: 2px;
+      margin-bottom: 6px;
+    }
+
+    /* ── SOFTWARE ───────────────────────────────────────────── */
+    .software-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2px;
+      margin-left: calc(var(--margin-w) + var(--col-gap));
+    }
+    .software-card {
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      padding: 24px;
+      position: relative;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .software-card:hover {
+      border-color: var(--green-deep);
+      transform: translateY(-2px);
+    }
+    .sw-name {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+    .sw-desc {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .sw-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 14px;
+    }
+    .sw-tag {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.04em;
+      padding: 3px 8px;
+      background: var(--surface);
+      color: var(--muted);
+      border-radius: 2px;
+    }
+    .sw-link {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+    }
+    .sw-link:hover { color: var(--pink-deep); }
+
+    /* ── CONTACT ────────────────────────────────────────────── */
+    #contact { border-bottom: none; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: var(--margin-w) 1fr;
+      gap: 0 var(--col-gap);
+    }
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .contact-row {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+    }
+    .contact-type {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      width: 60px;
+      flex-shrink: 0;
+    }
+    .contact-val {
+      font-size: 14px;
+      color: var(--ink-soft);
+    }
+    .contact-val a {
+      color: var(--ink-soft);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 1px;
+      transition: all 0.2s;
+    }
+    .contact-val a:hover {
+      color: var(--green-deep);
+      border-color: var(--green-deep);
+    }
+
+    /* ── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      padding: 24px 30px;
+      border-top: 1px solid var(--rule);
+    }
+    .footer-inner {
+      max-width: calc(var(--margin-w) + var(--col-gap) + var(--content-max) + 60px);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer-inner span {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink-faint);
+      letter-spacing: 0.04em;
+    }
+
+    /* ── SCROLL REVEAL ──────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(14px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 680px) {
+      :root { --margin-w: 0px; --col-gap: 0px; }
+      .cv-row, .hero-grid, .section-header, .experience-entry,
+      .pub-entry, .contact-grid {
+        grid-template-columns: 1fr;
+      }
+      .cv-label, .hero-monogram, .section-tag, .pub-year { text-align: left; }
+      .numbers-grid, .interests-list, .software-grid { margin-left: 0; }
+      nav { padding: 12px 16px; }
+      .nav-links { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-inner">
+      <span class="nav-name">N. J. Day</span>
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#numbers">Numbers</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#software">Software</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- HERO / ABOUT -->
+  <div class="page-wrap">
+    <section id="about">
+      <div class="hero-grid">
+        <div class="hero-monogram">
+          NJD<span></span>2022—
+        </div>
+        <div>
+          <h1 class="name">Nathan J. Day</h1>
+          <p class="title-line">
+            Postdoctoral Research Fellow &nbsp;·&nbsp;
+            <span class="accent">The Francis Crick Institute</span>
+            &nbsp;·&nbsp; London
+          </p>
+          <p class="bio">
+            I build computational tools to understand how <em>Mycobacterium tuberculosis</em> 
+            exploits host cell heterogeneity. My work sits at the intersection of live-cell 
+            time-lapse microscopy, deep learning image analysis, and quantitative cell biology — 
+            using single-cell tracking to ask why some infected macrophages clear bacteria 
+            while others succumb.
+          </p>
+          <p class="bio" style="margin-top:-12px;">
+            Previously: cell competition dynamics at UCL (PhD, Alan Lowe Lab). 
+            Trained as a physicist; retrained by biology.
+          </p>
+          <div class="hero-links">
+            <a class="pill primary" href="https://github.com/nthndy" target="_blank">GitHub</a>
+            <a class="pill" href="https://scholar.google.com/citations?user=htaiM1wAAAAJ&hl=en" target="_blank">Google Scholar</a>
+            <a class="pill" href="https://www.crick.ac.uk/research/find-a-researcher/nathan-day" target="_blank">Crick Profile</a>
+            <a class="pill" href="https://nthndy.github.io/macrohet_worldwide/" target="_blank">Interactive Preprint</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- IN NUMBERS -->
+  <section id="numbers">
+    <div class="page-wrap">
+      <div class="section-header">
+        <div class="section-tag">metrics</div>
+        <h2 class="section-title">In Numbers</h2>
+      </div>
+      <div class="numbers-grid">
+        <div class="number-card">
+          <span class="number-value" data-target="2400000" data-suffix="M">0</span>
+          <span class="number-label">single cells<br>tracked</span>
+        </div>
+        <div class="number-card">
+          <span class="number-value" data-target="6">0</span>
+          <span class="number-label">peer-reviewed<br>publications</span>
+        </div>
+        <div class="number-card">
+          <span class="number-value" data-target="8">0</span>
+          <span class="number-label">years of<br>research</span>
+        </div>
+        <div class="number-card">
+          <span class="number-value" data-target="4">0</span>
+          <span class="number-label">research<br>institutions</span>
+        </div>
+        <div class="number-card">
+          <span class="number-value" data-target="3">0</span>
+          <span class="number-label">open-source<br>repositories</span>
+        </div>
+        <div class="number-card">
+          <span class="number-value" data-target="100">0</span>
+          <span class="number-label">TB drug<br>conditions imaged</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESEARCH -->
+  <section id="research">
+    <div class="page-wrap">
+      <div class="section-header">
+        <div class="section-tag">work</div>
+        <h2 class="section-title">Research</h2>
+      </div>
+
+      <div class="interests-list reveal">
+        <span class="interest-tag">host–pathogen interactions</span>
+        <span class="interest-tag">single-cell heterogeneity</span>
+        <span class="interest-tag">live-cell timelapse microscopy</span>
+        <span class="interest-tag">deep learning segmentation</span>
+        <span class="interest-tag">cell tracking</span>
+        <span class="interest-tag">iPSC-derived macrophages</span>
+        <span class="interest-tag">tuberculosis</span>
+        <span class="interest-tag">antibiotic efficacy</span>
+        <span class="interest-tag">Python image analysis</span>
+        <span class="interest-tag">napari</span>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">2022 —</div>
+        <div class="cv-content">
+          <div class="exp-title">Postdoctoral Research Fellow</div>
+          <div class="exp-place">Gutierrez Lab · The Francis Crick Institute, London</div>
+          <p class="exp-desc">Characterising single-cell heterogeneity of <em>M. tuberculosis</em> infection 
+          in iPSC-derived human macrophages using high-throughput time-lapse microscopy. 
+          Deep learning segmentation and Bayesian tracking pipeline to trace bacterial 
+          burden dynamics at single-cell resolution across antitubercular drug treatments.</p>
+        </div>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">2018 — 2022</div>
+        <div class="cv-content">
+          <div class="exp-title">PhD in Cellular Biophysics</div>
+          <div class="exp-place">Lowe Lab · University College London</div>
+          <p class="exp-desc">Reverse-engineering cell competition from single-cell observations using 
+          timelapse microscopy with deep learning segmentation and Bayesian tracking. 
+          Characterised mutant elimination dynamics in wild-type vs. Scr<sup>KD</sup> 
+          and Ras<sup>V12</sup> MDCK epithelium.</p>
+        </div>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">2017</div>
+        <div class="cv-content">
+          <div class="exp-title">Visiting Researcher</div>
+          <div class="exp-place">Krieg Lab · Institute of Photonic Sciences, Barcelona</div>
+          <p class="exp-desc">Implementing protein retention expansion microscopy (ProExM) on 
+          <em>C. elegans</em> touch receptor neurons.</p>
+        </div>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">2016 — 2017</div>
+        <div class="cv-content">
+          <div class="exp-title">MSci in Physics</div>
+          <div class="exp-place">Owen Lab · King's College London</div>
+          <p class="exp-desc">Super-resolution microscopy of membrane lipid order in T-cell 
+          immunological synapses using polarity-sensitive fluorescent dyes.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section id="publications">
+    <div class="page-wrap">
+      <div class="section-header">
+        <div class="section-tag">papers</div>
+        <h2 class="section-title">Publications</h2>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-year highlight">preprint</div>
+        <div class="cv-content">
+          <div class="preprint-badge">In Submission</div>
+          <div class="pub-title">Fast-growing intracellular <em>Mycobacterium tuberculosis</em> populations evade antibiotic treatment.</div>
+          <div class="pub-authors"><strong>Day, N. J.</strong>, Pradel, B., Luk, C. H., Fearns, A., Rodgers, A., Santucci, P., Aylan, B., Botella, L., Vaubourgeix, J., Canseco, J. O., Athanasiadi, N., &amp; Gutierrez, M. G.</div>
+          <a class="pub-link" href="https://nthndy.github.io/macrohet_worldwide/" target="_blank">Interactive preprint ↗</a>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-year">2026</div>
+        <div class="cv-content">
+          <div class="pub-title">Autologous human iPSC-derived alveolus-on-chip reveals early pathological events of <em>Mycobacterium tuberculosis</em> infection.</div>
+          <div class="pub-authors">Luk, C. H., Conway, G. L., Goh, K. J., Fearns, A., Rodriguez Hernandez, I., <strong>Day, N. J.</strong>, Athanasiadi, N., D'Antuono, R., Pellegrino, E., Stucki, J. D., Hobi, N., &amp; Gutierrez, M. G.</div>
+          <div class="pub-journal"><span class="journal-name">Science Advances</span> · 12(1), eaea9874</div>
+          <a class="pub-link" href="https://doi.org/10.1126/sciadv.aea9874" target="_blank">doi ↗</a>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-year">2025</div>
+        <div class="cv-content">
+          <div class="pub-title">Spatial and temporal signatures of cell competition revealed by K-function analysis.</div>
+          <div class="pub-authors"><strong>Day, N. J.</strong>, Michalowska, J., Kelkar, M., Vallardi, G., Charras, G., &amp; Lowe, A. R.</div>
+          <div class="pub-journal"><span class="journal-name">Molecular Biology of the Cell</span> · 36(5)</div>
+          <a class="pub-link" href="https://doi.org/10.1091/mbc.E24-10-0481" target="_blank">doi ↗</a>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-year">2023</div>
+        <div class="cv-content">
+          <div class="pub-title">Host cell environments and antibiotic efficacy in tuberculosis.</div>
+          <div class="pub-authors"><strong>Day, N. J.</strong>, Santucci, P., &amp; Gutierrez, M. G.</div>
+          <div class="pub-journal"><span class="journal-name">Trends in Microbiology</span> · 32(3), 270–279</div>
+          <a class="pub-link" href="https://doi.org/10.1016/j.tim.2023.08.009" target="_blank">doi ↗</a>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-year">2022</div>
+        <div class="cv-content">
+          <div class="pub-title">Convolutional neural networks for classifying chromatin morphology in live-cell imaging.</div>
+          <div class="pub-authors">Ulicna, K., Ho, L., Soelistyo, C., <strong>Day, N. J.</strong>, &amp; Lowe, A. R.</div>
+          <div class="pub-journal"><span class="journal-name">Methods in Molecular Biology</span> · 2476, 17–30</div>
+          <a class="pub-link" href="https://doi.org/10.1007/978-1-0716-2221-6_3" target="_blank">doi ↗</a>
+        </div>
+      </div>
+
+      <div class="pub-entry">
+        <div class="pub-year">2018</div>
+        <div class="cv-content">
+          <div class="pub-title">Membrane lipid order of sub-synaptic T cell vesicles correlates with their dynamics and function.</div>
+          <div class="pub-authors">Ashdown, G., Williamson, D., Soh, G., <strong>Day, N. J.</strong>, &amp; Owen, D.</div>
+          <div class="pub-journal"><span class="journal-name">Traffic</span> · 2018; 19: 29–35</div>
+          <a class="pub-link" href="https://doi.org/10.1111/tra.12532" target="_blank">doi ↗</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SOFTWARE -->
+  <section id="software">
+    <div class="page-wrap">
+      <div class="section-header">
+        <div class="section-tag">tools</div>
+        <h2 class="section-title">Software</h2>
+      </div>
+      <div class="software-grid reveal">
+
+        <div class="software-card">
+          <div class="sw-name">macrohet</div>
+          <div class="sw-desc">Single-cell segmentation, tracking and heterogeneity quantification pipeline for Mtb infection in iPSC-derived macrophages.</div>
+          <div class="sw-tags">
+            <span class="sw-tag">Python</span>
+            <span class="sw-tag">napari</span>
+            <span class="sw-tag">deep learning</span>
+            <span class="sw-tag">tracking</span>
+          </div>
+          <a class="sw-link" href="https://github.com/nthndy" target="_blank">github ↗</a>
+        </div>
+
+        <div class="software-card">
+          <div class="sw-name">macrohet_worldwide</div>
+          <div class="sw-desc">Interactive preprint visualisation — explore single-cell infection data from the macrohet project in the browser.</div>
+          <div class="sw-tags">
+            <span class="sw-tag">interactive</span>
+            <span class="sw-tag">data viz</span>
+            <span class="sw-tag">preprint</span>
+          </div>
+          <a class="sw-link" href="https://nthndy.github.io/macrohet_worldwide/" target="_blank">live site ↗</a>
+        </div>
+
+        <div class="software-card">
+          <div class="sw-name">cnn-annotator</div>
+          <div class="sw-desc">Convolutional neural network tool for classifying chromatin morphology states in live-cell timelapse imaging.</div>
+          <div class="sw-tags">
+            <span class="sw-tag">Python</span>
+            <span class="sw-tag">CNN</span>
+            <span class="sw-tag">annotation</span>
+          </div>
+          <a class="sw-link" href="https://github.com/lowe-lab-ucl/cnn-annotator" target="_blank">github ↗</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="page-wrap">
+      <div class="section-header">
+        <div class="section-tag">reach</div>
+        <h2 class="section-title">Contact</h2>
+      </div>
+      <div class="contact-grid reveal">
+        <div></div>
+        <div class="contact-links">
+          <div class="contact-row">
+            <span class="contact-type">email</span>
+            <span class="contact-val"><a href="mailto:nathan.day@crick.ac.uk">nathan.day@crick.ac.uk</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-type">github</span>
+            <span class="contact-val"><a href="https://github.com/nthndy" target="_blank">github.com/nthndy</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-type">scholar</span>
+            <span class="contact-val"><a href="https://scholar.google.com/citations?user=htaiM1wAAAAJ&hl=en" target="_blank">Google Scholar</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-type">crick</span>
+            <span class="contact-val"><a href="https://www.crick.ac.uk/research/find-a-researcher/nathan-day" target="_blank">Institutional profile</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <span>Nathan J. Day — The Francis Crick Institute</span>
+      <span id="footer-date"></span>
+    </div>
+  </footer>
+
+  <script>
+    // ── SCROLL REVEAL ──────────────────────────────────────────
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((e, i) => {
+        if (e.isIntersecting) {
+          setTimeout(() => e.target.classList.add('visible'), i * 80);
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08 });
+
+    document.querySelectorAll('.reveal, .experience-entry, .pub-entry')
+      .forEach(el => revealObserver.observe(el));
+
+    // ── NUMBER COUNTERS ────────────────────────────────────────
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.querySelectorAll('.number-value[data-target]').forEach(el => {
+          animateCounter(el);
+        });
+        counterObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.3 });
+
+    const numbersSection = document.getElementById('numbers');
+    if (numbersSection) counterObserver.observe(numbersSection);
+
+    function animateCounter(el) {
+      const target = parseInt(el.dataset.target, 10);
+      const suffix = el.dataset.suffix || '';
+      const duration = 1400;
+      const start = performance.now();
+
+      function step(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        // ease out cubic
+        const eased = 1 - Math.pow(1 - progress, 3);
+        const current = Math.round(eased * target);
+
+        if (suffix === 'M') {
+          el.textContent = (current / 1000000).toFixed(1) + 'M';
+        } else {
+          el.textContent = current.toLocaleString();
+        }
+
+        if (progress < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    // ── FOOTER DATE ────────────────────────────────────────────
+    document.getElementById('footer-date').textContent =
+      'Last updated: ' + new Date().toLocaleDateString('en-GB', {
+        year: 'numeric', month: 'long'
+      });
+
+    // ── STAGGERED ENTRY DELAYS ─────────────────────────────────
+    document.querySelectorAll('.experience-entry').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 80}ms`;
+    });
+    document.querySelectorAll('.pub-entry').forEach((el, i) => {
+      el.style.transitionDelay = `${i * 60}ms`;
+    });
+  </script>
+</body>
+</html>

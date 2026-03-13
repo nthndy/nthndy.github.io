@@ -222,11 +222,40 @@
 
     /* ── IN NUMBERS ─────────────────────────────────────────── */
     #numbers { background: var(--surface); }
+    .numbers-project {
+      margin-left: calc(var(--margin-w) + var(--col-gap));
+      margin-bottom: 28px;
+    }
+    .numbers-project-header {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      margin-bottom: 2px;
+    }
+    .numbers-project-title {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--ink);
+    }
+    .numbers-project-sub {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--ink-faint);
+      letter-spacing: 0.03em;
+    }
     .numbers-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
       gap: 2px;
+    }
+    .numbers-divider {
       margin-left: calc(var(--margin-w) + var(--col-gap));
+      border: none;
+      border-top: 1px solid var(--rule);
+      margin-bottom: 28px;
     }
     .number-card {
       padding: 28px 24px;
@@ -389,6 +418,20 @@
       color: var(--pink-deep);
       border-radius: 2px;
       margin-bottom: 6px;
+    }
+    .cover-badge {
+      display: inline-block;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      background: #f0faf0;
+      color: var(--green-deep);
+      border: 1px solid var(--green-light);
+      border-radius: 2px;
+      margin-bottom: 6px;
+      margin-left: 5px;
     }
 
     /* ── SOFTWARE ───────────────────────────────────────────── */
@@ -560,17 +603,13 @@
             &nbsp;·&nbsp; London
           </p>
           <p class="bio">
-            (This online CV is still being built as of March 2026).
-            I build computational tools to understand how <em>Mycobacterium tuberculosis</em> 
+            ONLINE CV CURRENTLY WIP: I build computational tools to understand how <em>Mycobacterium tuberculosis</em> 
             exploits host cell heterogeneity. My work sits at the intersection of live-cell 
             time-lapse microscopy, deep learning image analysis, and quantitative cell biology — 
             using single-cell tracking to ask why some infected macrophages clear bacteria 
             while others succumb.
           </p>
-          <p class="bio" style="margin-top:-12px;">
-            Previously: cell competition dynamics at UCL (PhD, Alan Lowe Lab). 
-            Trained as a physicist; retrained by biology.
-          </p>
+
           <div class="hero-links">
             <a class="pill primary" href="https://github.com/nthndy" target="_blank">GitHub</a>
             <a class="pill" href="https://scholar.google.com/citations?user=htaiM1wAAAAJ&hl=en" target="_blank">Google Scholar</a>
@@ -589,30 +628,89 @@
         <div class="section-tag">metrics</div>
         <h2 class="section-title">In Numbers</h2>
       </div>
-      <div class="numbers-grid">
-        <div class="number-card">
-          <span class="number-value" data-target="2400000" data-suffix="M">0</span>
-          <span class="number-label">single cells<br>tracked</span>
+      <!-- macrohet -->
+      <div class="numbers-project">
+        <div class="numbers-project-header">
+          <span class="numbers-project-title">macrohet</span>
+          <span class="numbers-project-sub">Mtb infection heterogeneity · iPSC-derived macrophages · Crick Institute</span>
         </div>
-        <div class="number-card">
-          <span class="number-value" data-target="6">0</span>
-          <span class="number-label">peer-reviewed<br>publications</span>
+        <div class="numbers-grid">
+          <div class="number-card">
+            <span class="number-value" data-target="18152" data-suffix="K">0</span>
+            <span class="number-label">macrophages<br>tracked</span>
+          </div>
+          <div class="number-card">
+            <span class="number-value" data-target="10371" data-suffix="K">0</span>
+            <span class="number-label">infected cells<br>analysed</span>
+          </div>
+          <div class="number-card">
+            <span class="number-value" data-target="4934">0</span>
+            <span class="number-label">cells manually<br>annotated</span>
+          </div>
+          <div class="number-card">
+            <span class="number-value" data-target="6">0</span>
+            <span class="number-label">antibiotic<br>conditions</span>
+          </div>
+          <div class="number-card">
+            <span class="number-value" data-target="126" data-suffix="dec">0</span>
+            <span class="number-label">terabytes of<br>image data</span>
+          </div>
         </div>
-        <div class="number-card">
-          <span class="number-value" data-target="8">0</span>
-          <span class="number-label">years of<br>research</span>
+      </div>
+
+      <hr class="numbers-divider" />
+
+      <!-- competition -->
+      <div class="numbers-project">
+        <div class="numbers-project-header">
+          <span class="numbers-project-title">signatures of competition</span>
+          <span class="numbers-project-sub">K-function analysis of cell competition · UCL</span>
         </div>
-        <div class="number-card">
-          <span class="number-value" data-target="4">0</span>
-          <span class="number-label">research<br>institutions</span>
+        <div class="numbers-grid">
+          <div class="number-card">
+            <span class="number-value" data-target="29000" data-suffix="K">0</span>
+            <span class="number-label">mitotic events<br>identified</span>
+          </div>
+          <div class="number-card">
+            <span class="number-value" data-target="191">0</span>
+            <span class="number-label">elimination events<br>manually verified</span>
+          </div>
+          <div class="number-card">
+            <span class="number-value" data-target="70">0</span>
+            <span class="number-label">timelapse<br>acquisitions</span>
+          </div>
+          <div class="number-card">
+            <span class="number-value" data-target="21" data-suffix="dec">0</span>
+            <span class="number-label">terabytes of<br>image data</span>
+          </div>
         </div>
-        <div class="number-card">
-          <span class="number-value" data-target="3">0</span>
-          <span class="number-label">open-source<br>repositories</span>
+      </div>
+
+      <hr class="numbers-divider" />
+
+      <!-- combined -->
+      <div class="numbers-project">
+        <div class="numbers-project-header">
+          <span class="numbers-project-title">combined</span>
+          <span class="numbers-project-sub">across all projects</span>
         </div>
-        <div class="number-card">
-          <span class="number-value" data-target="100">0</span>
-          <span class="number-label">TB drug<br>conditions imaged</span>
+        <div class="numbers-grid">
+          <div class="number-card">
+            <span class="number-value" data-target="6">0</span>
+            <span class="number-label">peer-reviewed<br>publications</span>
+          </div>
+          <div class="number-card">
+            <span class="number-value" data-target="3">0</span>
+            <span class="number-label">journal<br>covers</span>
+          </div>
+          <div class="number-card">
+            <span class="number-value" data-target="147" data-suffix="dec">0</span>
+            <span class="number-label">terabytes of<br>image data total</span>
+          </div>
+          <div class="number-card">
+            <span class="number-value" data-target="12">0</span>
+            <span class="number-label">years of<br>research</span>
+          </div>
         </div>
       </div>
     </div>
@@ -708,7 +806,7 @@
         <div class="cv-content">
           <div class="pub-title">Autologous human iPSC-derived alveolus-on-chip reveals early pathological events of <em>Mycobacterium tuberculosis</em> infection.</div>
           <div class="pub-authors">Luk, C. H., Conway, G. L., Goh, K. J., Fearns, A., Rodriguez Hernandez, I., <strong>Day, N. J.</strong>, Athanasiadi, N., D'Antuono, R., Pellegrino, E., Stucki, J. D., Hobi, N., &amp; Gutierrez, M. G.</div>
-          <div class="pub-journal"><span class="journal-name">Science Advances</span> · 12(1), eaea9874</div>
+          <div class="pub-journal"><span class="journal-name">Science Advances</span> · 12(1), eaea9874 <span class="cover-badge">★ journal cover</span></div>
           <a class="pub-link" href="https://doi.org/10.1126/sciadv.aea9874" target="_blank">doi ↗</a>
         </div>
       </div>
@@ -718,7 +816,7 @@
         <div class="cv-content">
           <div class="pub-title">Spatial and temporal signatures of cell competition revealed by K-function analysis.</div>
           <div class="pub-authors"><strong>Day, N. J.</strong>, Michalowska, J., Kelkar, M., Vallardi, G., Charras, G., &amp; Lowe, A. R.</div>
-          <div class="pub-journal"><span class="journal-name">Molecular Biology of the Cell</span> · 36(5)</div>
+          <div class="pub-journal"><span class="journal-name">Molecular Biology of the Cell</span> · 36(5) <span class="cover-badge">★ journal cover</span></div>
           <a class="pub-link" href="https://doi.org/10.1091/mbc.E24-10-0481" target="_blank">doi ↗</a>
         </div>
       </div>
@@ -728,7 +826,7 @@
         <div class="cv-content">
           <div class="pub-title">Host cell environments and antibiotic efficacy in tuberculosis.</div>
           <div class="pub-authors"><strong>Day, N. J.</strong>, Santucci, P., &amp; Gutierrez, M. G.</div>
-          <div class="pub-journal"><span class="journal-name">Trends in Microbiology</span> · 32(3), 270–279</div>
+          <div class="pub-journal"><span class="journal-name">Trends in Microbiology</span> · 32(3), 270–279 <span class="cover-badge">★ journal cover</span></div>
           <a class="pub-link" href="https://doi.org/10.1016/j.tim.2023.08.009" target="_blank">doi ↗</a>
         </div>
       </div>
@@ -878,12 +976,18 @@
       function step(now) {
         const elapsed = now - start;
         const progress = Math.min(elapsed / duration, 1);
-        // ease out cubic
         const eased = 1 - Math.pow(1 - progress, 3);
         const current = Math.round(eased * target);
 
         if (suffix === 'M') {
           el.textContent = (current / 1000000).toFixed(1) + 'M';
+        } else if (suffix === 'K') {
+          el.textContent = current >= 1000
+            ? (current / 1000).toFixed(1) + 'K'
+            : current.toLocaleString();
+        } else if (suffix === 'dec') {
+          // stored as integer × 10, display as X.X
+          el.textContent = (current / 10).toFixed(1);
         } else {
           el.textContent = current.toLocaleString();
         }

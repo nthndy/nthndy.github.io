@@ -6,570 +6,7 @@
   <title>Nathan J. Day — Researcher</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=JetBrains+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
-
-  <style>
-    /* ── TOKENS ─────────────────────────────────────────────── */
-    :root {
-      --green-deep:   #1a9641;
-      --green-light:  #a6d96a;
-      --pink-deep:    #d02c91;
-      --pink-light:   #f1b6da;
-      --muted:        #978897;
-      --rule:         #d1d1ca;
-      --bg:           #fafaf8;
-      --surface:      #f4f4f0;
-      --ink:          #1a1a18;
-      --ink-soft:     #3d3d38;
-      --ink-faint:    #7a7a72;
-
-      --mono: 'JetBrains Mono', monospace;
-      --serif: 'DM Serif Display', Georgia, serif;
-      --body: 'Lora', Georgia, serif;
-
-      --margin-w: 100px;
-      --content-max: 780px;
-      --col-gap: 40px;
-    }
-
-    /* ── RESET ──────────────────────────────────────────────── */
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
-    body {
-      background: var(--bg);
-      color: var(--ink);
-      font-family: var(--body);
-      font-size: 16px;
-      line-height: 1.7;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: var(--green-deep); text-decoration: none; }
-    a:hover { color: var(--pink-deep); }
-
-    /* ── LAYOUT ─────────────────────────────────────────────── */
-    .page-wrap {
-      max-width: calc(var(--margin-w) + var(--col-gap) + var(--content-max) + 60px);
-      margin: 0 auto;
-      padding: 0 30px;
-    }
-
-    /* Two-column grid: margin label | content */
-    .cv-row {
-      display: grid;
-      grid-template-columns: var(--margin-w) 1fr;
-      gap: 0 var(--col-gap);
-      margin-bottom: 0;
-    }
-    .cv-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      font-weight: 400;
-      color: var(--ink-faint);
-      letter-spacing: 0.03em;
-      padding-top: 3px;
-      text-align: right;
-      line-height: 1.5;
-    }
-    .cv-content { min-width: 0; }
-
-    /* ── NAV ────────────────────────────────────────────────── */
-    nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: var(--bg);
-      border-bottom: 1px solid var(--rule);
-      padding: 14px 30px;
-    }
-    .nav-inner {
-      max-width: calc(var(--margin-w) + var(--col-gap) + var(--content-max) + 60px);
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .nav-name {
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--ink);
-    }
-    .nav-links {
-      display: flex;
-      gap: 28px;
-      list-style: none;
-    }
-    .nav-links a {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      transition: color 0.2s;
-    }
-    .nav-links a:hover { color: var(--green-deep); }
-
-    /* ── HERO ───────────────────────────────────────────────── */
-    #about {
-      padding: 80px 0 60px;
-      border-bottom: 1px solid var(--rule);
-    }
-    .hero-grid {
-      display: grid;
-      grid-template-columns: var(--margin-w) 1fr;
-      gap: 0 var(--col-gap);
-      align-items: start;
-    }
-    .hero-monogram {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--ink-faint);
-      text-align: right;
-      padding-top: 8px;
-      line-height: 1.8;
-    }
-    .hero-monogram span {
-      display: block;
-      width: 28px;
-      height: 1px;
-      background: var(--green-deep);
-      margin: 8px 0 8px auto;
-    }
-    h1.name {
-      font-family: var(--serif);
-      font-size: clamp(38px, 5vw, 58px);
-      font-weight: 400;
-      line-height: 1.05;
-      letter-spacing: -0.01em;
-      color: var(--ink);
-      margin-bottom: 6px;
-    }
-    .title-line {
-      font-family: var(--mono);
-      font-size: 11px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 28px;
-    }
-    .title-line .accent { color: var(--green-deep); }
-    .bio {
-      font-size: 16px;
-      line-height: 1.8;
-      color: var(--ink-soft);
-      max-width: 620px;
-      margin-bottom: 32px;
-    }
-    .hero-links {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    .pill {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      padding: 6px 14px;
-      border: 1px solid var(--rule);
-      color: var(--ink-soft);
-      border-radius: 2px;
-      transition: all 0.2s;
-    }
-    .pill:hover {
-      border-color: var(--green-deep);
-      color: var(--green-deep);
-      background: transparent;
-    }
-    .pill.primary {
-      background: var(--green-deep);
-      border-color: var(--green-deep);
-      color: white;
-    }
-    .pill.primary:hover {
-      background: var(--pink-deep);
-      border-color: var(--pink-deep);
-      color: white;
-    }
-
-    /* ── SECTION SCAFFOLD ───────────────────────────────────── */
-    section { padding: 56px 0; border-bottom: 1px solid var(--rule); }
-    section:last-of-type { border-bottom: none; }
-
-    .section-header {
-      display: grid;
-      grid-template-columns: var(--margin-w) 1fr;
-      gap: 0 var(--col-gap);
-      margin-bottom: 36px;
-    }
-    .section-tag {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--green-deep);
-      text-align: right;
-      padding-top: 10px;
-    }
-    h2.section-title {
-      font-family: var(--serif);
-      font-size: 28px;
-      font-weight: 400;
-      color: var(--ink);
-      letter-spacing: -0.01em;
-    }
-
-    /* ── IN NUMBERS ─────────────────────────────────────────── */
-    #numbers { background: var(--surface); }
-    .numbers-project {
-      margin-left: calc(var(--margin-w) + var(--col-gap));
-      margin-bottom: 28px;
-    }
-    .numbers-project-header {
-      display: flex;
-      align-items: baseline;
-      gap: 14px;
-      margin-bottom: 2px;
-    }
-    .numbers-project-title {
-      font-family: var(--mono);
-      font-size: 11px;
-      font-weight: 500;
-      letter-spacing: 0.07em;
-      text-transform: uppercase;
-      color: var(--ink);
-    }
-    .numbers-project-sub {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--ink-faint);
-      letter-spacing: 0.03em;
-    }
-    .numbers-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 2px;
-    }
-    .numbers-divider {
-      margin-left: calc(var(--margin-w) + var(--col-gap));
-      border: none;
-      border-top: 1px solid var(--rule);
-      margin-bottom: 28px;
-    }
-    .number-card {
-      padding: 28px 24px;
-      background: var(--bg);
-      position: relative;
-      overflow: hidden;
-      transition: background 0.3s;
-    }
-    .number-card::after {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 0;
-      width: 0; height: 2px;
-      background: var(--green-deep);
-      transition: width 0.4s ease;
-    }
-    .number-card:hover::after { width: 100%; }
-    .number-card:hover { background: #f0f7f0; }
-    .number-value {
-      font-family: var(--mono);
-      font-size: 38px;
-      font-weight: 300;
-      color: var(--ink);
-      line-height: 1;
-      margin-bottom: 8px;
-      display: block;
-    }
-    .number-value .unit {
-      font-size: 18px;
-      color: var(--muted);
-    }
-    .number-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      line-height: 1.4;
-    }
-
-    /* ── RESEARCH ───────────────────────────────────────────── */
-    .interests-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 40px;
-      margin-left: calc(var(--margin-w) + var(--col-gap));
-    }
-    .interest-tag {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.04em;
-      padding: 5px 12px;
-      border: 1px solid var(--green-light);
-      color: var(--green-deep);
-      border-radius: 2px;
-      background: #f0faf0;
-    }
-
-    .experience-entry {
-      display: grid;
-      grid-template-columns: var(--margin-w) 1fr;
-      gap: 0 var(--col-gap);
-      margin-bottom: 28px;
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .experience-entry.visible {
-      opacity: 1;
-      transform: none;
-    }
-    .exp-title {
-      font-family: var(--body);
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 2px;
-    }
-    .exp-place {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.04em;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-    .exp-desc {
-      font-size: 14px;
-      color: var(--ink-soft);
-      line-height: 1.7;
-    }
-
-    /* ── PUBLICATIONS ───────────────────────────────────────── */
-    .pub-entry {
-      display: grid;
-      grid-template-columns: var(--margin-w) 1fr;
-      gap: 0 var(--col-gap);
-      margin-bottom: 24px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--rule);
-      opacity: 0;
-      transform: translateY(12px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .pub-entry:last-child { border-bottom: none; }
-    .pub-entry.visible { opacity: 1; transform: none; }
-
-    .pub-year {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--ink-faint);
-      text-align: right;
-      padding-top: 3px;
-    }
-    .pub-year.highlight {
-      color: var(--pink-deep);
-      font-weight: 500;
-    }
-    .pub-title {
-      font-family: var(--body);
-      font-size: 15px;
-      font-style: italic;
-      color: var(--ink);
-      margin-bottom: 4px;
-      line-height: 1.5;
-    }
-    .pub-authors {
-      font-size: 13px;
-      color: var(--ink-faint);
-      margin-bottom: 4px;
-      line-height: 1.5;
-    }
-    .pub-authors strong { color: var(--ink-soft); font-weight: 500; }
-    .pub-journal {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.03em;
-      color: var(--muted);
-      margin-bottom: 6px;
-    }
-    .pub-journal .journal-name { color: var(--green-deep); }
-    .pub-link {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--green-deep);
-      border-bottom: 1px solid var(--green-light);
-      padding-bottom: 1px;
-    }
-    .pub-link:hover { color: var(--pink-deep); border-color: var(--pink-light); }
-    .preprint-badge {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 2px 7px;
-      background: var(--pink-light);
-      color: var(--pink-deep);
-      border-radius: 2px;
-      margin-bottom: 6px;
-    }
-    .cover-badge {
-      display: inline-block;
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 2px 7px;
-      background: #f0faf0;
-      color: var(--green-deep);
-      border: 1px solid var(--green-light);
-      border-radius: 2px;
-      margin-bottom: 6px;
-      margin-left: 5px;
-    }
-
-    /* ── SOFTWARE ───────────────────────────────────────────── */
-    .software-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 2px;
-      margin-left: calc(var(--margin-w) + var(--col-gap));
-    }
-    .software-card {
-      background: var(--bg);
-      border: 1px solid var(--rule);
-      padding: 24px;
-      position: relative;
-      transition: border-color 0.2s, transform 0.2s;
-    }
-    .software-card:hover {
-      border-color: var(--green-deep);
-      transform: translateY(-2px);
-    }
-    .sw-name {
-      font-family: var(--mono);
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--ink);
-      margin-bottom: 6px;
-    }
-    .sw-desc {
-      font-size: 13px;
-      color: var(--ink-soft);
-      line-height: 1.6;
-      margin-bottom: 14px;
-    }
-    .sw-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-bottom: 14px;
-    }
-    .sw-tag {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.04em;
-      padding: 3px 8px;
-      background: var(--surface);
-      color: var(--muted);
-      border-radius: 2px;
-    }
-    .sw-link {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--green-deep);
-    }
-    .sw-link:hover { color: var(--pink-deep); }
-
-    /* ── CONTACT ────────────────────────────────────────────── */
-    #contact { border-bottom: none; }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: var(--margin-w) 1fr;
-      gap: 0 var(--col-gap);
-    }
-    .contact-links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .contact-row {
-      display: flex;
-      align-items: baseline;
-      gap: 16px;
-    }
-    .contact-type {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--muted);
-      width: 60px;
-      flex-shrink: 0;
-    }
-    .contact-val {
-      font-size: 14px;
-      color: var(--ink-soft);
-    }
-    .contact-val a {
-      color: var(--ink-soft);
-      border-bottom: 1px solid var(--rule);
-      padding-bottom: 1px;
-      transition: all 0.2s;
-    }
-    .contact-val a:hover {
-      color: var(--green-deep);
-      border-color: var(--green-deep);
-    }
-
-    /* ── FOOTER ─────────────────────────────────────────────── */
-    footer {
-      padding: 24px 30px;
-      border-top: 1px solid var(--rule);
-    }
-    .footer-inner {
-      max-width: calc(var(--margin-w) + var(--col-gap) + var(--content-max) + 60px);
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .footer-inner span {
-      font-family: var(--mono);
-      font-size: 10px;
-      color: var(--ink-faint);
-      letter-spacing: 0.04em;
-    }
-
-    /* ── SCROLL REVEAL ──────────────────────────────────────── */
-    .reveal {
-      opacity: 0;
-      transform: translateY(14px);
-      transition: opacity 0.55s ease, transform 0.55s ease;
-    }
-    .reveal.visible { opacity: 1; transform: none; }
-
-    /* ── RESPONSIVE ─────────────────────────────────────────── */
-    @media (max-width: 680px) {
-      :root { --margin-w: 0px; --col-gap: 0px; }
-      .cv-row, .hero-grid, .section-header, .experience-entry,
-      .pub-entry, .contact-grid {
-        grid-template-columns: 1fr;
-      }
-      .cv-label, .hero-monogram, .section-tag, .pub-year { text-align: left; }
-      .numbers-grid, .interests-list, .software-grid { margin-left: 0; }
-      nav { padding: 12px 16px; }
-      .nav-links { gap: 16px; }
-    }
-  </style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
 
@@ -580,9 +17,14 @@
       <ul class="nav-links">
         <li><a href="#about">About</a></li>
         <li><a href="#numbers">Numbers</a></li>
+        <li><a href="#education">Education</a></li>
         <li><a href="#research">Research</a></li>
         <li><a href="#publications">Publications</a></li>
+        <li><a href="#covers">Covers</a></li>
         <li><a href="#software">Software</a></li>
+        <li><a href="#presentations">Talks</a></li>
+        <li><a href="#teaching">Teaching</a></li>
+        <li><a href="#outreach">Outreach</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -716,6 +158,33 @@
     </div>
   </section>
 
+  <!-- EDUCATION -->
+  <section id="education">
+    <div class="page-wrap">
+      <div class="section-header">
+        <div class="section-tag">training</div>
+        <h2 class="section-title">Education</h2>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">2018 — 2023</div>
+        <div class="cv-content">
+          <div class="exp-title">PhD in Cellular Biophysics</div>
+          <div class="exp-place">University College London &nbsp;·&nbsp; University of London</div>
+        </div>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">2013 — 2017</div>
+        <div class="cv-content">
+          <div class="exp-title">MSci in Physics</div>
+          <div class="exp-place">King's College London &nbsp;·&nbsp; University of London</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
   <!-- RESEARCH -->
   <section id="research">
     <div class="page-wrap">
@@ -750,7 +219,7 @@
       </div>
 
       <div class="experience-entry">
-        <div class="cv-label">2018 — 2022</div>
+        <div class="cv-label">2018 — 2023</div>
         <div class="cv-content">
           <div class="exp-title">PhD in Cellular Biophysics</div>
           <div class="exp-place">Lowe Lab · University College London</div>
@@ -774,10 +243,18 @@
       <div class="experience-entry">
         <div class="cv-label">2016 — 2017</div>
         <div class="cv-content">
-          <div class="exp-title">MSci in Physics</div>
+          <div class="exp-title">MSci Project — Immunological Signalling &amp; Quantitative Super-Resolution Microscopy</div>
           <div class="exp-place">Owen Lab · King's College London</div>
-          <p class="exp-desc">Super-resolution microscopy of membrane lipid order in T-cell 
-          immunological synapses using polarity-sensitive fluorescent dyes.</p>
+          <p class="exp-desc">Study of polarity-sensitive fluorescent dyes to probe membrane order in the T-cell immunological synapse, in conjunction with novel super-resolution image analysis techniques.</p>
+        </div>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">2015 — 2016</div>
+        <div class="cv-content">
+          <div class="exp-title">BSc Project — Simulation of Condensed Matter</div>
+          <div class="exp-place">De Vita Lab · King's College London</div>
+          <p class="exp-desc">An investigation into the self-assembly of borazine-derivative monolayers using Metropolis Monte Carlo algorithms.</p>
         </div>
       </div>
     </div>
@@ -854,6 +331,40 @@
     </div>
   </section>
 
+  <!-- COVERS & FEATURED IMAGES -->
+  <section id="covers">
+    <div class="page-wrap">
+      <div class="section-header">
+        <div class="section-tag">featured</div>
+        <h2 class="section-title">Covers &amp; Featured Images</h2>
+      </div>
+      <div class="covers-grid reveal">
+
+        <div class="cover-card">
+          <object class="cover-thumb" data="https://nthndy.github.io/mboc_cover.pdf" type="application/pdf"><div class="cover-thumb-placeholder">mboc_cover.pdf</div></object>
+          <div class="cover-venue">Molecular Biology of the Cell</div>
+          <div class="cover-year">2025</div>
+          <span class="cover-type-badge journal">Manuscript Cover</span>
+        </div>
+
+        <div class="cover-card">
+          <img class="cover-thumb" src="https://nthndy.github.io/trends_cover.jpg" alt="Trends in Microbiology cover 2023" />
+          <div class="cover-venue">Trends in Microbiology</div>
+          <div class="cover-year">2023</div>
+          <span class="cover-type-badge journal">Manuscript Cover</span>
+        </div>
+
+        <div class="cover-card">
+          <object class="cover-thumb" data="https://nthndy.github.io/crick_gallery.pdf" type="application/pdf"><div class="cover-thumb-placeholder">crick_gallery.pdf</div></object>
+          <div class="cover-venue">The Francis Crick Institute</div>
+          <div class="cover-year">2025</div>
+          <span class="cover-type-badge gallery">Images of Science Exhibition · Gallery Feature</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- SOFTWARE -->
   <section id="software">
     <div class="page-wrap">
@@ -864,8 +375,9 @@
       <div class="software-grid reveal">
 
         <div class="software-card">
-          <div class="sw-name">macrohet</div>
-          <div class="sw-desc">Single-cell segmentation, tracking and heterogeneity quantification pipeline for Mtb infection in iPSC-derived macrophages.</div>
+          <div class="sw-year">2026</div>
+          <div class="sw-name">macrohet &amp; macrohet_worldwide</div>
+          <div class="sw-desc">Python framework for high-throughput analysis of intracellular <em>M. tuberculosis</em> growth heterogeneity from multidimensional microscopy data, with an interactive data-sharing web application.</div>
           <div class="sw-tags">
             <span class="sw-tag">Python</span>
             <span class="sw-tag">napari</span>
@@ -873,22 +385,80 @@
             <span class="sw-tag">tracking</span>
           </div>
           <a class="sw-link" href="https://github.com/nthndy" target="_blank">github ↗</a>
-        </div>
-
-        <div class="software-card">
-          <div class="sw-name">macrohet_worldwide</div>
-          <div class="sw-desc">Interactive preprint visualisation — explore single-cell infection data from the macrohet project in the browser.</div>
-          <div class="sw-tags">
-            <span class="sw-tag">interactive</span>
-            <span class="sw-tag">data viz</span>
-            <span class="sw-tag">preprint</span>
-          </div>
+          &nbsp;&nbsp;
           <a class="sw-link" href="https://nthndy.github.io/macrohet_worldwide/" target="_blank">live site ↗</a>
         </div>
 
         <div class="software-card">
+          <div class="sw-year">2026</div>
+          <span class="wip-badge">Work in Progress</span>
+          <div class="sw-name">heterognosis</div>
+          <div class="sw-desc">In-development pipeline linking live-cell timelapse tracking with 4i (iterative indirect immunofluorescence imaging) multiplexing, being integrated into a Nextflow pipeline with the Software Engineering and AI STP.</div>
+          <div class="sw-tags">
+            <span class="sw-tag">Python</span>
+            <span class="sw-tag">Nextflow</span>
+            <span class="sw-tag">4i</span>
+            <span class="sw-tag">multiplexing</span>
+          </div>
+          <a class="sw-link" href="https://github.com/nthndy" target="_blank">github ↗</a>
+        </div>
+
+        <div class="software-card">
+          <div class="sw-year">2025</div>
+          <div class="sw-name">homuncu_loc</div>
+          <div class="sw-desc">Single-cell segmentation and tracking pipeline designed for the autologous human iPSC-derived alveolus-on-a-chip project.</div>
+          <div class="sw-tags">
+            <span class="sw-tag">Python</span>
+            <span class="sw-tag">segmentation</span>
+            <span class="sw-tag">tracking</span>
+            <span class="sw-tag">iPSC</span>
+          </div>
+          <a class="sw-link" href="https://github.com/nthndy" target="_blank">github ↗</a>
+        </div>
+
+        <div class="software-card">
+          <div class="sw-year">2024</div>
+          <div class="sw-name">Cask</div>
+          <div class="sw-desc">Cell competition analysis tool utilising spatiotemporal K-functions to characterise elimination dynamics.</div>
+          <div class="sw-tags">
+            <span class="sw-tag">Python</span>
+            <span class="sw-tag">K-function</span>
+            <span class="sw-tag">cell competition</span>
+          </div>
+          <a class="sw-link" href="https://github.com/nthndy" target="_blank">github ↗</a>
+        </div>
+
+        <div class="software-card">
+          <div class="sw-year">2023</div>
+          <div class="sw-name">Opera Phenix Mosaic Tiler</div>
+          <div class="sw-desc">Python module leveraging Dask and Shapely for out-of-core stitching and on-the-fly compilation of high-throughput multidimensional microscopy datasets exported from Harmony software.</div>
+          <div class="sw-tags">
+            <span class="sw-tag">Python</span>
+            <span class="sw-tag">Dask</span>
+            <span class="sw-tag">Shapely</span>
+            <span class="sw-tag">HCS</span>
+          </div>
+          <a class="sw-link" href="https://github.com/nthndy" target="_blank">github ↗</a>
+        </div>
+
+        <div class="software-card">
+          <div class="sw-year">2022</div>
+          <span class="contrib-badge">Contributor</span>
+          <div class="sw-name">btrack</div>
+          <div class="sw-desc">Contributed Dask array support, multi-channel region properties, and Z-dimension segmentation scaling to this Bayesian multi-object tracking framework.</div>
+          <div class="sw-tags">
+            <span class="sw-tag">Python</span>
+            <span class="sw-tag">Bayesian</span>
+            <span class="sw-tag">tracking</span>
+            <span class="sw-tag">Dask</span>
+          </div>
+          <a class="sw-link" href="https://github.com/quantumjot/btrack" target="_blank">github ↗</a>
+        </div>
+
+        <div class="software-card">
+          <div class="sw-year">2021</div>
           <div class="sw-name">cnn-annotator</div>
-          <div class="sw-desc">Convolutional neural network tool for classifying chromatin morphology states in live-cell timelapse imaging.</div>
+          <div class="sw-desc">Published protocol repository for annotating microscopy images to train convolutional neural network classifiers for chromatin morphology states.</div>
           <div class="sw-tags">
             <span class="sw-tag">Python</span>
             <span class="sw-tag">CNN</span>
@@ -897,7 +467,224 @@
           <a class="sw-link" href="https://github.com/lowe-lab-ucl/cnn-annotator" target="_blank">github ↗</a>
         </div>
 
+        <div class="software-card">
+          <div class="sw-year">2020</div>
+          <div class="sw-name">cell-comp-analysis</div>
+          <div class="sw-desc">Core analysis scripts and pipelines developed for PhD research on cell competition, including single-cell feature extraction and spatiotemporal statistics.</div>
+          <div class="sw-tags">
+            <span class="sw-tag">Python</span>
+            <span class="sw-tag">cell competition</span>
+            <span class="sw-tag">analysis</span>
+          </div>
+          <a class="sw-link" href="https://github.com/nthndy" target="_blank">github ↗</a>
+        </div>
+
+        <div class="software-card">
+          <div class="sw-year">2019</div>
+          <div class="sw-name">jspim_realignment</div>
+          <div class="sw-desc">ImageJ/Fiji macro pipelines for automated compiling and spatial deskewing of multidimensional light-sheet microscopy (SPIM) datasets.</div>
+          <div class="sw-tags">
+            <span class="sw-tag">ImageJ</span>
+            <span class="sw-tag">Fiji</span>
+            <span class="sw-tag">light-sheet</span>
+            <span class="sw-tag">SPIM</span>
+          </div>
+          <a class="sw-link" href="https://github.com/nthndy" target="_blank">github ↗</a>
+        </div>
+
+        <div class="software-card">
+          <div class="sw-year">2018</div>
+          <div class="sw-name">hologram_analysis</div>
+          <div class="sw-desc">MATLAB pipelines for extracting optical path difference and calculating cellular dry mass from Mach-Zehnder interferometry data to study early-stage fate commitment in cell competition.</div>
+          <div class="sw-tags">
+            <span class="sw-tag">MATLAB</span>
+            <span class="sw-tag">interferometry</span>
+            <span class="sw-tag">dry mass</span>
+          </div>
+          <a class="sw-link" href="https://github.com/nthndy" target="_blank">github ↗</a>
+        </div>
+
       </div>
+    </div>
+  </section>
+
+  <!-- PRESENTATIONS & POSTERS -->
+  <section id="presentations">
+    <div class="page-wrap">
+      <div class="section-header">
+        <div class="section-tag">talks</div>
+        <h2 class="section-title">Presentations &amp; Posters</h2>
+      </div>
+
+      <div class="talk-entry">
+        <div class="talk-year">01 / 2026</div>
+        <div class="cv-content">
+          <span class="talk-type submitted">Submitted Talk</span>
+          <div class="talk-title">Fast-growing intracellular <em>Mycobacterium tuberculosis</em> populations evade antibiotic treatment</div>
+          <ul class="talk-venues"><li>Acid Fast Club Winter Meeting, Queen Mary University of London</li></ul>
+        </div>
+      </div>
+
+      <div class="talk-entry">
+        <div class="talk-year">2025</div>
+        <div class="cv-content">
+          <span class="talk-type poster">Poster</span>
+          <div class="talk-title">Fast-growing intracellular <em>Mycobacterium tuberculosis</em> populations evade antibiotic treatment</div>
+          <ul class="talk-venues">
+            <li>Crick Bioimage Analysis Symposium, London</li>
+            <li>Host-Pathogen Interactions Mini Symposium, The Francis Crick Institute, London</li>
+            <li>Light Sheet Microscopy EMBO Practical Course, Dresden, Germany</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="talk-entry">
+        <div class="talk-year">2024 — 2025</div>
+        <div class="cv-content">
+          <span class="talk-type invited">Invited Talk ×2</span>
+          <div class="talk-title">Characterising the single-cell heterogeneity of antibiotic efficacy in Tuberculosis</div>
+          <ul class="talk-venues"><li>Host-Pathogen Interest Group, The Francis Crick Institute, London</li></ul>
+        </div>
+      </div>
+
+      <div class="talk-entry">
+        <div class="talk-year">2023 — 2025</div>
+        <div class="cv-content">
+          <span class="talk-type invited">Invited Talk ×2</span>
+          <div class="talk-title">Crash course in object tracking &amp; Intro to Dask lazy-loading</div>
+          <ul class="talk-venues"><li>Image Analysis Club, The Francis Crick Institute, London</li></ul>
+        </div>
+      </div>
+
+      <div class="talk-entry">
+        <div class="talk-year">01 / 2022</div>
+        <div class="cv-content">
+          <span class="talk-type invited">Invited Talk</span>
+          <div class="talk-title">How does cell competition play out on a single-cell level?</div>
+          <ul class="talk-venues"><li>Istanbul Medipol University Canlılık Symposium</li></ul>
+        </div>
+      </div>
+
+      <div class="talk-entry">
+        <div class="talk-year">01 / 2022</div>
+        <div class="cv-content">
+          <span class="talk-type invited">Invited Talk</span>
+          <div class="talk-title">Deducing the mechanism of cell competition from single-cell observations</div>
+          <ul class="talk-venues"><li>UCL Bioimage Analysis Interest Group</li></ul>
+        </div>
+      </div>
+
+      <div class="talk-entry">
+        <div class="talk-year">11 / 2021</div>
+        <div class="cv-content">
+          <span class="talk-type prize">Prize-winning Poster</span>
+          <div class="talk-title">Cell Competition, who makes the first move?</div>
+          <ul class="talk-venues"><li>Crick Bioimage Analysis Symposium, London</li></ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- TEACHING -->
+  <section id="teaching">
+    <div class="page-wrap">
+      <div class="section-header">
+        <div class="section-tag">education</div>
+        <h2 class="section-title">Teaching &amp; Tutoring</h2>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">2023 — 2024</div>
+        <div class="cv-content">
+          <div class="exp-title">Mentor — Crick Data Challenge</div>
+          <div class="exp-place">The Francis Crick Institute, London</div>
+          <p class="exp-desc">Mentored two teams during the annual Crick Data Challenge, guiding early-career researchers through Python-based image analysis and quantitative microscopy workflows.</p>
+        </div>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">05 / 2023</div>
+        <div class="cv-content">
+          <div class="exp-title">Guest Lecturer — LMCB Tutorial on Single-Cell Image Analysis</div>
+          <div class="exp-place">Laboratory for Molecular Cell Biology, UCL</div>
+          <p class="exp-desc">Delivered lecture for postgraduate students on single-cell image analysis methods.</p>
+        </div>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">2021 — 2022</div>
+        <div class="cv-content">
+          <div class="exp-title">Teaching Assistant — BIOC0016 &amp; CELL0009/CELL0011</div>
+          <div class="exp-place">University College London</div>
+          <p class="exp-desc">Helped design and deliver MSc-level courses in Computational and Systems Biology and Integrative Cell Biology, focusing on image analysis and machine learning methods.</p>
+        </div>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">2014 — 2018</div>
+        <div class="cv-content">
+          <div class="exp-title">Academic Tutor</div>
+          <div class="exp-place">Private &amp; classroom settings</div>
+          <p class="exp-desc">Tutored mathematics, biology, chemistry, and physics from school child to graduate level, including private tuition and A-level classrooms.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PUBLIC ENGAGEMENT -->
+  <section id="outreach">
+    <div class="page-wrap">
+      <div class="section-header">
+        <div class="section-tag">outreach</div>
+        <h2 class="section-title">Public Engagement &amp; Philanthropy</h2>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">03 / 2025</div>
+        <div class="cv-content">
+          <div class="exp-title">Invited Presentation — Private Philanthropy Event</div>
+          <div class="exp-place">The Francis Crick Institute, London</div>
+          <p class="exp-desc">Invited to present research on <em>M. tuberculosis</em> infection heterogeneity to visiting philanthropic donors.</p>
+        </div>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">11 / 2023</div>
+        <div class="cv-content">
+          <div class="exp-title">Curious About the Crick — Philanthropy Evening</div>
+          <div class="exp-place">The Francis Crick Institute, London</div>
+          <p class="exp-desc">Ran a public engagement stall at a philanthropy evening for prospective supporters of the Francis Crick Institute.</p>
+        </div>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">2022 —</div>
+        <div class="cv-content">
+          <div class="exp-title">Lunch with a Scientist — School Outreach</div>
+          <div class="exp-place">The Francis Crick Institute, London</div>
+          <p class="exp-desc">Hosted visiting school students at the Crick, introducing young people to life as a researcher and the science of infectious disease.</p>
+        </div>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">2022 —</div>
+        <div class="cv-content">
+          <div class="exp-title">Secondary School Visit — School Outreach</div>
+          <p class="exp-desc">Participating in outreach at my former secondary school to encourage higher education progression — particularly meaningful as a first-generation university student.</p>
+        </div>
+      </div>
+
+      <div class="experience-entry">
+        <div class="cv-label">2021 — 2022</div>
+        <div class="cv-content">
+          <div class="exp-title">Volunteer — Euston Food Bank</div>
+          <div class="exp-place">London</div>
+          <p class="exp-desc">Weekly volunteering throughout the pandemic and beyond, managing stock, coordinating large deliveries, and preparing food packages.</p>
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -916,6 +703,10 @@
             <span class="contact-val"><a href="mailto:nathan.day@crick.ac.uk">nathan.day@crick.ac.uk</a></span>
           </div>
           <div class="contact-row">
+            <span class="contact-type">address</span>
+            <span class="contact-val">The Francis Crick Institute, 1 Midland Road, London NW1 1AT, UK</span>
+          </div>
+          <div class="contact-row">
             <span class="contact-type">github</span>
             <span class="contact-val"><a href="https://github.com/nthndy" target="_blank">github.com/nthndy</a></span>
           </div>
@@ -924,8 +715,20 @@
             <span class="contact-val"><a href="https://scholar.google.com/citations?user=htaiM1wAAAAJ&hl=en" target="_blank">Google Scholar</a></span>
           </div>
           <div class="contact-row">
+            <span class="contact-type">orcid</span>
+            <span class="contact-val"><a href="https://orcid.org/0000-0003-2222-4556" target="_blank">ORCID</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-type">linkedin</span>
+            <span class="contact-val"><a href="https://www.linkedin.com/in/nthndy" target="_blank">LinkedIn</a></span>
+          </div>
+          <div class="contact-row">
             <span class="contact-type">crick</span>
             <span class="contact-val"><a href="https://www.crick.ac.uk/research/find-a-researcher/nathan-day" target="_blank">Institutional profile</a></span>
+          </div>
+          <div class="contact-row">
+            <span class="contact-type">cv online</span>
+            <span class="contact-val"><a href="https://nthndy.github.io" target="_blank">nthndy.github.io</a></span>
           </div>
         </div>
       </div>
@@ -939,77 +742,6 @@
     </div>
   </footer>
 
-  <script>
-    // ── SCROLL REVEAL ──────────────────────────────────────────
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach((e, i) => {
-        if (e.isIntersecting) {
-          setTimeout(() => e.target.classList.add('visible'), i * 80);
-          revealObserver.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.08 });
-
-    document.querySelectorAll('.reveal, .experience-entry, .pub-entry')
-      .forEach(el => revealObserver.observe(el));
-
-    // ── NUMBER COUNTERS ────────────────────────────────────────
-    const counterObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        entry.target.querySelectorAll('.number-value[data-target]').forEach(el => {
-          animateCounter(el);
-        });
-        counterObserver.unobserve(entry.target);
-      });
-    }, { threshold: 0.3 });
-
-    const numbersSection = document.getElementById('numbers');
-    if (numbersSection) counterObserver.observe(numbersSection);
-
-    function animateCounter(el) {
-      const target = parseInt(el.dataset.target, 10);
-      const suffix = el.dataset.suffix || '';
-      const duration = 1400;
-      const start = performance.now();
-
-      function step(now) {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        const current = Math.round(eased * target);
-
-        if (suffix === 'M') {
-          el.textContent = (current / 1000000).toFixed(1) + 'M';
-        } else if (suffix === 'K') {
-          el.textContent = current >= 1000
-            ? (current / 1000).toFixed(1) + 'K'
-            : current.toLocaleString();
-        } else if (suffix === 'dec') {
-          // stored as integer × 10, display as X.X
-          el.textContent = (current / 10).toFixed(1);
-        } else {
-          el.textContent = current.toLocaleString();
-        }
-
-        if (progress < 1) requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    }
-
-    // ── FOOTER DATE ────────────────────────────────────────────
-    document.getElementById('footer-date').textContent =
-      'Last updated: ' + new Date().toLocaleDateString('en-GB', {
-        year: 'numeric', month: 'long'
-      });
-
-    // ── STAGGERED ENTRY DELAYS ─────────────────────────────────
-    document.querySelectorAll('.experience-entry').forEach((el, i) => {
-      el.style.transitionDelay = `${i * 80}ms`;
-    });
-    document.querySelectorAll('.pub-entry').forEach((el, i) => {
-      el.style.transitionDelay = `${i * 60}ms`;
-    });
-  </script>
+  <script src="main.js" defer></script>
 </body>
 </html>

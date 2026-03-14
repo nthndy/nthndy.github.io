@@ -95,10 +95,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (e) {
     const u = 'nathan.day';
     const d = 'crick' + '.ac.uk';
-    const addr = u + '@' + d;
     const link = document.createElement('a');
-    link.href = 'mailto:' + addr;
-    link.textContent = addr;
+    link.href = 'mailto:' + u + '@' + d;
+    link.textContent = u + '@' + d;
     e.appendChild(link);
   }
 

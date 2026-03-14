@@ -61,6 +61,22 @@
         year: 'numeric', month: 'long'
       });
 
+    // ── SCROLL VIDEO ───────────────────────────────────────────
+    const scrollVideo = document.getElementById('scroll-video');
+    const scrollSection = document.getElementById('scroll-video-section');
+
+    if (scrollVideo && scrollSection) {
+      scrollVideo.addEventListener('loadedmetadata', () => {
+        window.addEventListener('scroll', () => {
+          const rect = scrollSection.getBoundingClientRect();
+          const sectionHeight = scrollSection.offsetHeight - window.innerHeight;
+          const scrolled = -rect.top;
+          const progress = Math.max(0, Math.min(1, scrolled / sectionHeight));
+          scrollVideo.currentTime = progress * scrollVideo.duration;
+        }, { passive: true });
+      });
+    }
+
     // ── STAGGERED ENTRY DELAYS ─────────────────────────────────
     document.querySelectorAll('.software-card, .cover-card, .number-card').forEach((el, i) => {
       el.style.transitionDelay = (i * 40) + 'ms';

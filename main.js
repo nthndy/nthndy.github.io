@@ -11,22 +11,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ── HERO VIDEO: play on first scroll, pause when idle ──────
   const heroVideo = document.getElementById('hero-video');
-  let scrollTimer = null;
-  let videoStarted = false;
+  // let scrollTimer = null;
+  // let videoStarted = false;
 
-  window.addEventListener('scroll', () => {
-    if (!videoStarted) {
-      videoStarted = true;
-      heroVideo.play();
-    }
-    // keep playing while scrolling
-    if (heroVideo.paused) heroVideo.play();
-    clearTimeout(scrollTimer);
-    // pause 800ms after scroll stops
-    scrollTimer = setTimeout(() => {
-      heroVideo.pause();
-    }, 800);
-  }, { passive: true });
+  // window.addEventListener('scroll', () => {
+  //   if (!videoStarted) {
+  //     videoStarted = true;
+  //     heroVideo.play();
+  //   }
+  //   // keep playing while scrolling
+  //   if (heroVideo.paused) heroVideo.play();
+  //   clearTimeout(scrollTimer);
+  //   // pause 800ms after scroll stops
+  //   scrollTimer = setTimeout(() => {
+  //     heroVideo.pause();
+  //   }, 800);
+  // }, { passive: true });
 
   // ── BLANK OUT NUMBER VALUES until counter fires ────────────
   document.querySelectorAll('.number-value[data-target]').forEach(el => {

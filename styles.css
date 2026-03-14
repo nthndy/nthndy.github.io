@@ -197,6 +197,11 @@
       height: auto;
       border-radius: 16px;
     }
+
+    .hero-video {
+      object-fit: cover;
+      object-position: center 66%;
+    }
     .hero-video-caption {
       position: absolute;
       bottom: 0; left: 0; right: 0;

@@ -65,6 +65,19 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(step);
   }
 
+  // ── EMAIL PROTECTION ──────────────────────────────────────
+  // Address is never a plain string in source — assembled at runtime
+  const e = document.getElementById('contact-email');
+  if (e) {
+    const u = 'nathan.day';
+    const d = 'crick' + '.ac.uk';
+    const addr = u + '@' + d;
+    const link = document.createElement('a');
+    link.href = 'mailto:' + addr;
+    link.textContent = addr;
+    e.appendChild(link);
+  }
+
   // ── FOOTER DATE ────────────────────────────────────────────
   const footerDate = document.getElementById('footer-date');
   if (footerDate) {

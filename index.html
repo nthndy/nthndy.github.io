@@ -27,6 +27,9 @@
         <li><a href="#outreach">Outreach</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
+      <button class="dark-toggle" id="dark-toggle" aria-label="Toggle dark mode">
+        <span class="dark-toggle-icon"></span>
+      </button>
     </div>
   </nav>
 
@@ -35,29 +38,41 @@
     <section id="about">
       <div class="hero-grid">
         <div class="hero-monogram">
-         
         </div>
-        <div>
-          <h1 class="name">Nathan J. Day</h1>
-          <p class="title-line">
-            Postdoctoral Research Fellow &nbsp;·&nbsp;
-            <span class="accent">The Francis Crick Institute</span>
-            &nbsp;·&nbsp; London
-          </p>
-          <p class="bio">
-            I build computational tools to understand how <em>Mycobacterium tuberculosis</em> 
-            exploits host cell heterogeneity. My work sits at the intersection of live-cell 
-            time-lapse microscopy, deep learning image analysis, and quantitative cell biology — 
-            using single-cell tracking to ask why some infected macrophages clear bacteria 
-            while others succumb.
-          </p>
+        <div class="hero-body">
 
-          <div class="hero-links">
-            <a class="pill primary" href="https://github.com/nthndy" target="_blank">GitHub</a>
-            <a class="pill" href="https://scholar.google.com/citations?user=htaiM1wAAAAJ&hl=en" target="_blank">Google Scholar</a>
-            <a class="pill" href="https://www.crick.ac.uk/research/find-a-researcher/nathan-day" target="_blank">Crick Profile</a>
-            <a class="pill" href="https://nthndy.github.io/macrohet_worldwide/" target="_blank">Interactive Preprint</a>
+          <!-- video -->
+          <div class="hero-video-wrap">
+            <video class="hero-video" id="hero-video" src="scroll.mp4" muted loop playsinline></video>
+            <div class="hero-video-caption">
+              <span><em>M. tuberculosis</em> infection in an iPSC-derived macrophage</span>
+              <span class="hero-video-sub">time-lapse · z-projected</span>
+            </div>
           </div>
+
+          <!-- text -->
+          <div class="hero-text">
+            <h1 class="name">Nathan J. Day, PhD</h1>
+            <p class="title-line">
+              Postdoctoral Research Fellow &nbsp;·&nbsp;
+              <span class="accent">The Francis Crick Institute</span>
+              &nbsp;·&nbsp; London
+            </p>
+            <p class="bio">
+              I build computational tools to understand how <em>Mycobacterium tuberculosis</em> 
+              exploits host cell heterogeneity. My work sits at the intersection of live-cell 
+              time-lapse microscopy, deep learning image analysis, and quantitative cell biology — 
+              using single-cell tracking to ask why some infected macrophages clear bacteria 
+              while others succumb.
+            </p>
+            <div class="hero-links">
+              <a class="pill primary" href="https://github.com/nthndy" target="_blank">GitHub</a>
+              <a class="pill" href="https://scholar.google.com/citations?user=htaiM1wAAAAJ&hl=en" target="_blank">Google Scholar</a>
+              <a class="pill" href="https://www.crick.ac.uk/research/find-a-researcher/nathan-day" target="_blank">Crick Profile</a>
+              <a class="pill" href="https://nthndy.github.io/macrohet_worldwide/" target="_blank">Interactive Preprint</a>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -311,7 +326,7 @@
       <div class="covers-grid reveal">
 
         <div class="cover-card">
-          <img class="cover-thumb" src="mboc_cover.jpg" alt="Molecular Biology of the Cell cover 2025" />
+          <iframe class="cover-thumb" src="mboc_cover.pdf" title="Molecular Biology of the Cell cover"></iframe>
           <div class="cover-venue">Molecular Biology of the Cell</div>
           <div class="cover-year">2025</div>
           <span class="cover-type-badge journal">Manuscript Cover · Vol. 36(5)</span>
@@ -325,7 +340,7 @@
         </div>
 
         <div class="cover-card">
-          <img class="cover-thumb" src="crick_gallery.jpg" alt="Crick Images of Science exhibition 2025" />
+          <iframe class="cover-thumb" src="crick_gallery.pdf" title="Crick Images of Science gallery feature"></iframe>
           <div class="cover-venue">The Francis Crick Institute</div>
           <div class="cover-year">2025</div>
           <span class="cover-type-badge gallery">Images of Science Exhibition · Gallery Feature</span>
@@ -670,7 +685,7 @@
         <div class="contact-links">
           <div class="contact-row">
             <span class="contact-type">email</span>
-            <span class="contact-val" id="contact-email"></span>
+            <span class="contact-val"><a href="/cdn-cgi/l/email-protection#761817021e17185812170f3615041f151d58171558031d"><span class="__cf_email__" data-cfemail="bbd5dacfd3dad595dfdac2fbd8c9d2d8d095dad895ced0">[email&#160;protected]</span></a></span>
           </div>
           <div class="contact-row">
             <span class="contact-type">address</span>

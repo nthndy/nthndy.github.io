@@ -1,5 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
 
+  // ── DARK MODE ──────────────────────────────────────────────
+  const toggle = document.getElementById('dark-toggle');
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (prefersDark) document.body.classList.add('dark');
+
+  toggle.addEventListener('click', () => {
+    document.body.classList.toggle('dark');
+  });
+
+  // ── HERO VIDEO: play on first scroll, pause when idle ──────
+  const heroVideo = document.getElementById('hero-video');
+  let scrollTimer = null;
+  let videoStarted = false;
+
+  window.addEventListener('scroll', () => {
+    if (!videoStarted) {
+      videoStarted = true;
+      heroVideo.play();
+    }
+    // keep playing while scrolling
+    if (heroVideo.paused) heroVideo.play();
+    clearTimeout(scrollTimer);
+    // pause 800ms after scroll stops
+    scrollTimer = setTimeout(() => {
+      heroVideo.pause();
+    }, 800);
+  }, { passive: true });
+
   // ── BLANK OUT NUMBER VALUES until counter fires ────────────
   document.querySelectorAll('.number-value[data-target]').forEach(el => {
     el.textContent = '';
@@ -39,8 +67,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const duration = 1400;
     const start = performance.now();
     const card = el.closest('.number-card');
-
-    // fade card in as counter starts
     card.style.transition = 'opacity 0.4s ease';
     card.style.opacity = '1';
 
@@ -59,14 +85,12 @@ document.addEventListener('DOMContentLoaded', () => {
       } else {
         el.textContent = current.toLocaleString();
       }
-
       if (progress < 1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   }
 
   // ── EMAIL PROTECTION ──────────────────────────────────────
-  // Address is never a plain string in source — assembled at runtime
   const e = document.getElementById('contact-email');
   if (e) {
     const u = 'nathan.day';

@@ -698,64 +698,7 @@
       outline: 1px solid var(--rule);
     }
 
-    /* ── SCROLL VIDEO ───────────────────────────────────────── */
-    #scroll-video-section {
-      padding: 0;
-      border-bottom: 1px solid var(--rule);
-    }
-    .scroll-video-outer {
-      height: 300vh; /* scrollable distance — controls how slowly the video plays */
-      position: relative;
-    }
-    .scroll-video-sticky {
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      background: var(--ink);
-    }
-    #scroll-video {
-      /* video is rotated 90° — swap width/height so it fills correctly */
-      height: 100vw;
-      width: 100vh;
-      max-height: 100vw;
-      max-width: 100vh;
-      object-fit: cover;
-      transform: rotate(90deg);
-      display: block;
-    }
-    .scroll-video-caption {
-      position: absolute;
-      bottom: 28px;
-      left: 0;
-      right: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      pointer-events: none;
-    }
-    .scroll-video-label {
-      font-family: var(--mono);
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,0.4);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    .scroll-video-desc {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.04em;
-      color: rgba(255,255,255,0.55);
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 0.4; }
-      50% { opacity: 0.9; }
-    }
+
       width: 100%;
       aspect-ratio: 3 / 4;
       display: flex;

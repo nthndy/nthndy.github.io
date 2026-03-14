@@ -191,6 +191,10 @@
       overflow: hidden;
       cursor: pointer;
     }
+
+    .hero-video-wrap {
+      margin-left: calc(-1 * (var(--margin-w) + var(--col-gap)));
+    }
     .hero-video {
       display: block;
       width: 100%;

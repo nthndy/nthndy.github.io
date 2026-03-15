@@ -187,39 +187,34 @@
       position: relative;
       flex-shrink: 0;
       width: 180px;
+      aspect-ratio: 9 / 16;
       border-radius: 16px;
       overflow: hidden;
       cursor: pointer;
-    }
-
-    .hero-video-wrap {
       margin-left: calc(-1 * (var(--margin-w) + var(--col-gap)));
     }
     .hero-video {
       display: block;
       width: 100%;
-      height: auto;
-      border-radius: 16px;
-    }
-
-    .hero-video {
+      height: 100%;
       object-fit: cover;
       object-position: center 66%;
     }
+
     .hero-video-caption {
       position: absolute;
-      bottom: 0; left: 0; right: 0;
-      padding: 20px 14px 14px;
-      background: linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 100%);
+      top: 0; left: 0; right: 0;
+      padding: 14px 14px 20px;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 100%);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
       display: flex;
       flex-direction: column;
       gap: 3px;
       opacity: 0;
-      transform: translateY(6px);
+      transform: translateY(-6px);
       transition: opacity 0.3s ease, transform 0.3s ease;
-      border-radius: 0 0 16px 16px;
+      border-radius: 16px 16px 0 0;
     }
     .hero-video-wrap:hover .hero-video-caption {
       opacity: 1;

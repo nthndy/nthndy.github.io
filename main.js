@@ -9,17 +9,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.toggle('dark');
   });
 
-  // ── HERO VIDEO: ping-pong loop ─────────────────────────────
-  const vid = document.getElementById('hero-video');
-  const sources = ['scroll.mp4', 'scroll_rev.mp4'];
-  let idx = 0;
-  vid.src = sources[idx];
-  vid.play();
-  vid.addEventListener('ended', () => {
-    idx = 1 - idx;
-    vid.src = sources[idx];
-    vid.play();
-  }); 
+  // // ── HERO VIDEO: ping-pong loop ─────────────────────────────
+  // const vid = document.getElementById('hero-video');
+  // const sources = ['scroll.mp4', 'scroll_rev.mp4'];
+  // let idx = 0;
+  // vid.src = sources[idx];
+  // vid.play();
+  // vid.addEventListener('ended', () => {
+  //   idx = 1 - idx;
+  //   vid.src = sources[idx];
+  //   vid.play();
+  // }); 
 
   // ── BLANK OUT NUMBER VALUES until counter fires ────────────
   document.querySelectorAll('.number-value[data-target]').forEach(el => {

@@ -834,12 +834,12 @@
     @media (max-width: 680px) {
       :root { --margin-w: 0px; --col-gap: 0px; }
       .cv-row, .hero-grid, .section-header, .experience-entry,
-      .pub-entry, .contact-grid {
+      .pub-entry, .contact-grid, .talk-entry {
         grid-template-columns: 1fr;
       }
       .hero-body { flex-direction: column; }
       .hero-video-wrap { width: 100%; max-width: 260px; }
-      .cv-label, .hero-monogram, .section-tag, .pub-year { text-align: left; }
+      .cv-label, .hero-monogram, .section-tag, .pub-year, .talk-year { text-align: left; }
       .numbers-grid, .interests-list, .software-grid, .covers-grid { margin-left: 0; }
       nav { padding: 12px 16px; }
       .nav-links { gap: 16px; }

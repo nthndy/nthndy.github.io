@@ -9,24 +9,17 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.toggle('dark');
   });
 
-  // ── HERO VIDEO: play on first scroll, pause when idle ──────
-  const heroVideo = document.getElementById('hero-video');
-  // let scrollTimer = null;
-  // let videoStarted = false;
-
-  // window.addEventListener('scroll', () => {
-  //   if (!videoStarted) {
-  //     videoStarted = true;
-  //     heroVideo.play();
-  //   }
-  //   // keep playing while scrolling
-  //   if (heroVideo.paused) heroVideo.play();
-  //   clearTimeout(scrollTimer);
-  //   // pause 800ms after scroll stops
-  //   scrollTimer = setTimeout(() => {
-  //     heroVideo.pause();
-  //   }, 800);
-  // }, { passive: true });
+  // ── HERO VIDEO: ping-pong loop ─────────────────────────────
+  const vid = document.getElementById('hero-video');
+  const sources = ['scroll.mp4', 'scroll_rev.mp4'];
+  let idx = 0;
+  vid.src = sources[idx];
+  vid.play();
+  vid.addEventListener('ended', () => {
+    idx = 1 - idx;
+    vid.src = sources[idx];
+    vid.play();
+  }); 
 
   // ── BLANK OUT NUMBER VALUES until counter fires ────────────
   document.querySelectorAll('.number-value[data-target]').forEach(el => {

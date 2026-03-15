@@ -830,16 +830,153 @@
       color: var(--pink-deep);
     }
 
+    /* ── FIGURE MODAL ───────────────────────────────────────── */
+    .fig-modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 500;
+      background: rgba(10, 10, 8, 0.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+      pointer-events: none;
+    }
+    .fig-modal-backdrop.open {
+      opacity: 1;
+      pointer-events: all;
+    }
+    .fig-modal {
+      background: var(--bg);
+      border: 1px solid var(--rule);
+      border-radius: 4px;
+      width: 100%;
+      max-width: 900px;
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      transform: translateY(16px);
+      transition: transform 0.25s ease;
+      overflow: hidden;
+    }
+    .fig-modal-backdrop.open .fig-modal {
+      transform: translateY(0);
+    }
+    .fig-modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--rule);
+      flex-shrink: 0;
+    }
+    .fig-modal-label {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--green-deep);
+    }
+    .fig-modal-close {
+      background: none;
+      border: 1px solid var(--rule);
+      border-radius: 2px;
+      width: 28px;
+      height: 28px;
+      cursor: pointer;
+      color: var(--ink-faint);
+      font-family: var(--mono);
+      font-size: 14px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .fig-modal-close:hover {
+      border-color: var(--pink-deep);
+      color: var(--pink-deep);
+    }
+    .fig-modal-iframe-wrap {
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+      min-height: 0;
+    }
+    .fig-modal-iframe-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+    .fig-modal-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      color: var(--ink-faint);
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .fig-modal-loading.hidden { opacity: 0; }
+    .fig-modal-caption {
+      padding: 14px 20px;
+      border-top: 1px solid var(--rule);
+      font-size: 12px;
+      color: var(--ink-faint);
+      line-height: 1.6;
+      flex-shrink: 0;
+    }
+    .fig-modal-caption strong {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-bottom: 3px;
+    }
+    .fig-modal-caption a {
+      color: var(--green-deep);
+      font-family: var(--mono);
+      font-size: 10px;
+    }
+    /* Clickable card affordance */
+    .number-card[data-plot-url] {
+      cursor: pointer;
+    }
+    .number-card[data-plot-url]::after {
+      content: 'view figure →';
+      display: block;
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.05em;
+      color: var(--green-deep);
+      margin-top: 8px;
+      opacity: 0;
+      transition: opacity 0.2s;
+    }
+    .number-card[data-plot-url]:hover::after { opacity: 1; }
+
     /* ── RESPONSIVE ─────────────────────────────────────────── */
     @media (max-width: 680px) {
       :root { --margin-w: 0px; --col-gap: 0px; }
       .cv-row, .hero-grid, .section-header, .experience-entry,
-      .pub-entry, .contact-grid, .talk-entry {
+      .pub-entry, .contact-grid {
         grid-template-columns: 1fr;
       }
       .hero-body { flex-direction: column; }
       .hero-video-wrap { width: 100%; max-width: 260px; }
-      .cv-label, .hero-monogram, .section-tag, .pub-year, .talk-year { text-align: left; }
+      .cv-label, .hero-monogram, .section-tag, .pub-year { text-align: left; }
       .numbers-grid, .interests-list, .software-grid, .covers-grid { margin-left: 0; }
       nav { padding: 12px 16px; }
       .nav-links { gap: 16px; }

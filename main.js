@@ -1,5 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
-
+  
+  window.addEventListener('message', (e) => {
+    if (e.data?.type !== 'plotReady') return;
+    try {
+      const iframeWindow = modalIframe.contentWindow;
+      iframeWindow.Plotly.Plots.resize(
+        iframeWindow.document.getElementById('plot-1H')
+      );
+    } catch(err) {}
+  });
   // ── DARK MODE ──────────────────────────────────────────────
   const toggle = document.getElementById('dark-toggle');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -169,18 +178,6 @@ document.addEventListener('DOMContentLoaded', () => {
         // Cross-origin fallback — just show the page as-is
         console.warn('Figure modal: same-origin access failed', e);
       }
-
-      try {
-        const iframeWindow = modalIframe.contentWindow;
-        const checkPlotly = setInterval(() => {
-          const plotDiv = iframeWindow.document.getElementById('plot-1H');
-          if (iframeWindow.Plotly && plotDiv && plotDiv.data) {
-            iframeWindow.Plotly.Plots.resize(plotDiv);
-            clearInterval(checkPlotly);
-          }
-        }, 100);
-        setTimeout(() => clearInterval(checkPlotly), 8000); // give up after 8s
-      } catch(e) {}
 
       modalLoading.classList.add('hidden');
     };

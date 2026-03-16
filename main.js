@@ -1,16 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  
-  window.addEventListener('message', (e) => {
-    if (e.data?.type !== 'plotReady') return;
-    try {
-      const wrap = backdrop.querySelector('.fig-modal-iframe-wrap');
-      const iframeWindow = modalIframe.contentWindow;
-      const plotDiv = iframeWindow.document.querySelector('[id^="plot-"]');  // matches any plot div
-      plotDiv.style.width  = wrap.clientWidth  + 'px';
-      plotDiv.style.height = wrap.clientHeight + 'px';
-      iframeWindow.Plotly.Plots.resize(plotDiv);
-    } catch(err) {}
-  });
 
   // ── DARK MODE ──────────────────────────────────────────────
   const toggle = document.getElementById('dark-toggle');
@@ -108,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // ── FIGURE MODAL ───────────────────────────────────────────
-  // Build modal DOM once and reuse it
   const backdrop = document.createElement('div');
   backdrop.className = 'fig-modal-backdrop';
   backdrop.innerHTML = `
@@ -125,21 +112,32 @@ document.addEventListener('DOMContentLoaded', () => {
     </div>`;
   document.body.appendChild(backdrop);
 
-  const modalIframe   = backdrop.querySelector('#fig-modal-iframe');
-  const modalCaption  = backdrop.querySelector('.fig-modal-caption');
-  const modalLoading  = backdrop.querySelector('.fig-modal-loading');
-  const modalClose    = backdrop.querySelector('.fig-modal-close');
+  const modalIframe  = backdrop.querySelector('#fig-modal-iframe');
+  const modalCaption = backdrop.querySelector('.fig-modal-caption');
+  const modalLoading = backdrop.querySelector('.fig-modal-loading');
+  const modalClose   = backdrop.querySelector('.fig-modal-close');
 
-  function openModal(url, caption) {
-    // Show loading state
+  // ── PLOTLY RESIZE on postMessage ───────────────────────────
+  window.addEventListener('message', (e) => {
+    if (e.data?.type !== 'plotReady') return;
+    try {
+      const wrap = backdrop.querySelector('.fig-modal-iframe-wrap');
+      const iframeWindow = modalIframe.contentWindow;
+      const plotDiv = iframeWindow.document.querySelector('[id^="plot-"]');
+      plotDiv.style.width  = wrap.clientWidth  + 'px';
+      plotDiv.style.height = wrap.clientHeight + 'px';
+      iframeWindow.Plotly.Plots.resize(plotDiv);
+    } catch(err) {}
+  });
+
+  function openModal(url, caption, label) {
     modalLoading.classList.remove('hidden');
     modalIframe.src = '';
 
-    // Populate caption
     modalCaption.innerHTML = `
-      <strong>Fig. 1H · macrohet</strong>
+      <strong>${label || 'Fig. · macrohet'}</strong>
       ${caption}
-      <a href="https://nthndy.github.io/macrohet_worldwide/#F1H" target="_blank">
+      <a href="https://nthndy.github.io/macrohet_worldwide/" target="_blank">
         Open full interactive manuscript →
       </a>`;
 
@@ -156,38 +154,15 @@ document.addEventListener('DOMContentLoaded', () => {
     modalIframe.src = url + (isDark ? '?theme=dark' : '?theme=light');
 
     modalIframe.onload = () => {
-      // Same-origin: reach into the manuscript and strip noise
       try {
         const doc = modalIframe.contentDocument;
-
-        // Dismiss mobile warning if present
         const warn = doc.getElementById('mobile-warning');
         if (warn) warn.style.display = 'none';
-
-        // Hide everything in <article> except the target figure container
-        const article = doc.querySelector('article.scientific-paper');
-        if (article) {
-          // Hide all direct section children except the one containing F1H
-          article.querySelectorAll('section, header, figure').forEach(el => {
-            if (!el.contains(doc.getElementById('F1H'))) {
-              el.style.display = 'none';
-            }
-          });
-        }
-
-        // Hide sidebar TOC
         const sidebar = doc.getElementById('sidebar-toc');
         if (sidebar) sidebar.style.display = 'none';
-
-        // Scroll the figure into view inside the iframe
-        const target = doc.getElementById('F1H');
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
       } catch (e) {
-        // Cross-origin fallback — just show the page as-is
         console.warn('Figure modal: same-origin access failed', e);
       }
-
       modalLoading.classList.add('hidden');
     };
   }
@@ -195,7 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeModal() {
     backdrop.classList.remove('open');
     document.body.style.overflow = '';
-    // Delay src clear until after transition
     setTimeout(() => { modalIframe.src = ''; }, 280);
   }
 
@@ -213,7 +187,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // Wire up clickable cards
   document.querySelectorAll('.number-card[data-plot-url]').forEach(card => {
     card.addEventListener('click', () => {
-      openModal(card.dataset.plotUrl, card.dataset.plotCaption || '');
+      openModal(
+        card.dataset.plotUrl,
+        card.dataset.plotCaption || '',
+        card.dataset.plotLabel  || ''
+      );
     });
   });
 

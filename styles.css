@@ -966,7 +966,9 @@
       transition: opacity 0.2s;
     }
     .number-card[data-plot-url]:hover::after { opacity: 1; }
-
+    .number-card[data-link-url] {
+      cursor: pointer;
+    }
     /* ── RESPONSIVE ─────────────────────────────────────────── */
     @media (max-width: 680px) {
       :root { --margin-w: 0px; --col-gap: 0px; }

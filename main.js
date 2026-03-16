@@ -152,8 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
       modalIframe.style.height = wrap.clientHeight + 'px';
     });
 
-    // Load iframe — use hash to hint scroll position
-    modalIframe.src = url;
+    const isDark = document.body.classList.contains('dark');
+    modalIframe.src = url + (isDark ? '?theme=dark' : '?theme=light');
 
     modalIframe.onload = () => {
       // Same-origin: reach into the manuscript and strip noise

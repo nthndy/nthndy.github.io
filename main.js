@@ -3,12 +3,15 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('message', (e) => {
     if (e.data?.type !== 'plotReady') return;
     try {
+      const wrap = backdrop.querySelector('.fig-modal-iframe-wrap');
       const iframeWindow = modalIframe.contentWindow;
-      iframeWindow.Plotly.Plots.resize(
-        iframeWindow.document.getElementById('plot-1H')
-      );
+      const plotDiv = iframeWindow.document.getElementById('plot-1H');
+      plotDiv.style.width  = wrap.clientWidth  + 'px';
+      plotDiv.style.height = wrap.clientHeight + 'px';
+      iframeWindow.Plotly.Plots.resize(plotDiv);
     } catch(err) {}
   });
+
   // ── DARK MODE ──────────────────────────────────────────────
   const toggle = document.getElementById('dark-toggle');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -142,6 +145,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     backdrop.classList.add('open');
     document.body.style.overflow = 'hidden';
+
+    requestAnimationFrame(() => {
+      const wrap = backdrop.querySelector('.fig-modal-iframe-wrap');
+      modalIframe.style.width  = wrap.clientWidth  + 'px';
+      modalIframe.style.height = wrap.clientHeight + 'px';
+    });
 
     // Load iframe — use hash to hint scroll position
     modalIframe.src = url;

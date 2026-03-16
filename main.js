@@ -9,18 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.classList.toggle('dark');
   });
 
-  // // ── HERO VIDEO: ping-pong loop ─────────────────────────────
-  // const vid = document.getElementById('hero-video');
-  // const sources = ['scroll.mp4', 'scroll_rev.mp4'];
-  // let idx = 0;
-  // vid.src = sources[idx];
-  // vid.play();
-  // vid.addEventListener('ended', () => {
-  //   idx = 1 - idx;
-  //   vid.src = sources[idx];
-  //   vid.play();
-  // }); 
-
   // ── BLANK OUT NUMBER VALUES until counter fires ────────────
   document.querySelectorAll('.number-value[data-target]').forEach(el => {
     el.textContent = '';
@@ -181,6 +169,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // Cross-origin fallback — just show the page as-is
         console.warn('Figure modal: same-origin access failed', e);
       }
+
+      try {
+        const iframeWindow = modalIframe.contentWindow;
+        const checkPlotly = setInterval(() => {
+          const plotDiv = iframeWindow.document.getElementById('plot-1H');
+          if (iframeWindow.Plotly && plotDiv && plotDiv.data) {
+            iframeWindow.Plotly.Plots.resize(plotDiv);
+            clearInterval(checkPlotly);
+          }
+        }, 100);
+        setTimeout(() => clearInterval(checkPlotly), 8000); // give up after 8s
+      } catch(e) {}
 
       modalLoading.classList.add('hidden');
     };

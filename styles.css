@@ -905,8 +905,9 @@
       flex: 1;
       overflow: hidden;
       position: relative;
-      min-height: 500px;
+      min-height: 700px;
     }
+
     .fig-modal-iframe-wrap iframe {
       width: 100%;
       height: 100%;

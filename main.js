@@ -195,4 +195,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  document.querySelectorAll('.number-card[data-link-url]').forEach(card => {
+    card.addEventListener('click', () => {
+      window.open(card.dataset.linkUrl, '_blank');
+    });
+  });
+
 });

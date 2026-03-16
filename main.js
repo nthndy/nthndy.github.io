@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const wrap = backdrop.querySelector('.fig-modal-iframe-wrap');
       const iframeWindow = modalIframe.contentWindow;
-      const plotDiv = iframeWindow.document.getElementById('plot-1H');
+      const plotDiv = iframeWindow.document.querySelector('[id^="plot-"]');  // matches any plot div
       plotDiv.style.width  = wrap.clientWidth  + 'px';
       plotDiv.style.height = wrap.clientHeight + 'px';
       iframeWindow.Plotly.Plots.resize(plotDiv);

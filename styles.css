@@ -969,6 +969,20 @@
     .number-card[data-link-url] {
       cursor: pointer;
     }
+
+    .cover-credit {
+      font-family: var(--mono);
+      font-size: 9px;
+      letter-spacing: 0.04em;
+      color: var(--ink-faint);
+      margin-top: 6px;
+    }
+    .cover-credit a {
+      color: var(--muted);
+      border-bottom: 1px solid var(--rule);
+      padding-bottom: 1px;
+    }
+
     /* ── RESPONSIVE ─────────────────────────────────────────── */
     @media (max-width: 680px) {
       :root { --margin-w: 0px; --col-gap: 0px; }

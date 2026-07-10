@@ -72,10 +72,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ── EMAIL PROTECTION ──────────────────────────────────────
+  // Assemble the address at runtime from fragments so the complete
+  // string never appears literally in the served JS. Local part is
+  // char-coded so even "nthndy" isn't a greppable substring. This
+  // defeats static-file regex harvesters (the bulk of the volume);
+  // headless-browser scrapers still get through — Gmail's filter is
+  // the intended backstop for that tail.
   const e = document.getElementById('contact-email');
   if (e) {
-    const u = 'nathan.day';
-    const d = 'crick' + '.ac.uk';
+    const u = [110, 116, 104, 110, 100, 121].map(c => String.fromCharCode(c)).join('');
+    const d = ['gmail', 'com'].join('.');
     const link = document.createElement('a');
     link.href = 'mailto:' + u + '@' + d;
     link.textContent = u + '@' + d;

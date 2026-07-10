@@ -24,4 +24,4 @@ a live preprint manuscript on *M. tuberculosis* infection heterogeneity in iPSC-
 
 ---
 
-*Nathan J. Day — Postdoctoral Research Fellow, The Francis Crick Institute*
+*Nathan J. Day — Biophysicist · London*
